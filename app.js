@@ -10,3 +10,12 @@ cases.audio.body='<figure class="piece-preview podcast-preview"><img src="assets
 cases.newsletter.body='<p class="case-credit"><strong>Minha atuação:</strong> planejamento, estruturação e redação do conteúdo. Parte gráfica realizada por outros profissionais.</p>'+cases.newsletter.body;
 cases.b2b.body='<div class="tags"><span>LP</span><span>Blogposts</span><span>Redes Sociais</span></div><p class="case-credit"><strong>Minha atuação:</strong> planejamento, estruturação e redação do conteúdo. Parte gráfica realizada por outros profissionais.</p>'+cases.b2b.body;
 const dialog=document.querySelector('dialog');document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>{const c=cases[b.dataset.case];document.querySelector('#dialog-label').textContent=c.label;document.querySelector('#dialog-title').textContent=c.title;document.querySelector('#dialog-body').innerHTML=c.body;dialog.showModal()}));document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelectorAll('.project').forEach(p=>p.hidden=b.dataset.filter!=='todos'&&!p.dataset.category.split(' ').includes(b.dataset.filter))}));document.querySelector('#copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('ninaspaniak@gmail.com');document.querySelector('#copy-status').textContent='E-mail copiado.'}catch{document.querySelector('#copy-status').textContent='Selecione o endereço acima para copiar.'}});
+
+// Cover and title links use the same case-opening flow as the original CTA.
+document.querySelectorAll('[data-open-case]').forEach(link=>link.addEventListener('click',event=>{
+ event.preventDefault();
+ document.querySelector(`[data-case="${link.dataset.openCase}"]`)?.click();
+}));
+const linkedCase=location.hash.startsWith('#case-')?location.hash.slice(6):'';
+if(Object.hasOwn(cases,linkedCase))document.querySelector(`[data-case="${linkedCase}"]`)?.click();
+dialog.addEventListener('close',()=>{if(location.hash.startsWith('#case-'))history.replaceState(null,'','#trabalhos')});
