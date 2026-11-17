@@ -79,3 +79,12 @@ section.contact{padding-top:36px;padding-bottom:32px}
 .about-tags span{padding:4px 5px}
 footer{row-gap:12px}
 }
+
+/* Subtle publication and social shortcuts in the main header. */
+header{gap:24px}
+header>nav{min-width:0;align-items:center;flex-wrap:wrap;justify-content:flex-end;row-gap:12px}
+.header-socials{display:inline-flex;align-items:center;flex-shrink:0;gap:4px;border-left:1px solid #15151540;padding-left:14px}
+.header-socials a{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:5px;color:var(--ink);opacity:.65;text-decoration:none}
+.header-socials a:hover,.header-socials a:focus-visible{color:var(--blue);opacity:1}
+.header-socials svg{display:block;width:16px;height:16px}
+@media(max-width:750px){header{gap:16px}.header-socials{padding-left:10px}.header-socials a{width:24px;height:24px;padding:4px}}
